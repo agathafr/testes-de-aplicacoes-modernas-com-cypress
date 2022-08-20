@@ -131,7 +131,7 @@ const system = () => {
 
 #### Async Await
 
-Implementa promisses e deixar o uso mais simplificado. Como faz gerenciamento, tem um ciclo de vida, conceitos de retrys, não é recomendado o uso com cypress. Este precisa das promisses como descrito na documentação. 
+Implementa promisses e deixa o uso simplificado. Como faz gerenciamento, tem um ciclo de vida, conceitos de retrys, não é recomendado o uso com cypress. Este precisa das promisses como descrito na documentação. 
 
 ```bash
 const getSomething = () => {
@@ -151,3 +151,113 @@ const system = async () => {
     console.log('end')
 }
 ``` 
+
+## Describe / it
+
+### Aula: Estruturação dos arquivos de especificação com testes. Como usar o describe e o it. 
+
+#### Preparação:
+Adicionar a linha abaixo no topo do arquivo para que o vscode entenda que o cypress está sendo utilizado e a partir disso mostrar sugestões, destrições próximas a api do cypress. 
+
+```
+/// <reference types="cypress" />
+```
+
+##### Nota
+O cypress vem com alguns frameworks embutidos (moca, chai) que colaboram com a estruturação dos testes e assertivas.
+
+#### Estrutura
+- it() -> da o escopo de um teste. Recebe como primeiro parâmetro o nome do teste, e como segundo a função que contém o teste (arrow function).
+```bash
+it ('Nome do teste', () => {
+  // contém teste "da raiz do projeto"
+})
+```
+
+- testes -> ficam dentro do escopo e corpo do teste, após a abertura da chave "{" e antes do fechamento "}" da mesma.
+
+- describe() -> agrupa testes. Tem como primeiro parâmetro o nome que vai definir o grupo e como segundo a função que contém todos os testes do grupo. 
+```bash
+describe('Shold group tests...', () => {
+  // contém todas os testes criados para esse grupo (internos)
+  it('A internal test...', () => {
+        
+    })
+})
+```
+![image](https://user-images.githubusercontent.com/85461130/185761802-004033db-8930-4052-a0d3-00178e2cd344.png)
+
+É possível criar grupos dentro de grupos e mais de um teste em cada grupo.
+
+```bash
+describe('Should group tests...', () => {
+    describe('Should group more specific tests...', () => {
+        it('A specific test...', () => {
+
+        })
+
+        it('Another specific test...', () => {
+
+        })
+    })
+
+    describe('Should group more specific tests 2...', () => {
+        it('A specic test 2...', () => {
+            
+        })
+    })
+
+    it('A internal test...', () => {
+
+    })
+})
+```
+
+![image](https://user-images.githubusercontent.com/85461130/185762027-53ed85b5-2ec2-42b8-832f-9f81be8add0f.png)
+
+- skip -> não executa um teste ou grupo. it.skip ou describe.skip
+```bash
+describe('Should group tests...', () => {
+    describe.skip('Should group more specific tests...', () => {
+        it('A specific test...', () => {
+
+        })
+
+        it('Another specific test...', () => {
+
+        })
+    })
+
+    describe('Should group more specific tests 2...', () => {
+        it('A specic test 2...', () => {
+
+        })
+    })
+
+    it('A internal test...', () => {
+
+    })
+})
+```
+
+- only -> executa apenas o último teste ou grupo que o contém. it.only ou describe.only
+```bash
+it.only('A external test...', () => {
+
+})
+```
+![image](https://user-images.githubusercontent.com/85461130/185762452-ca985b2f-5b81-4364-8ee4-0079ac5e93bc.png)
+
+```bash
+describe.only('Should group more specific tests...', () => {
+    it('A specific test...', () => {
+
+    })
+
+    it('Another specific test...', () => {
+
+    })
+})
+```
+![image](https://user-images.githubusercontent.com/85461130/185762433-caaf4536-dc8f-4b5a-9167-9f3f131ec7bf.png)
+
