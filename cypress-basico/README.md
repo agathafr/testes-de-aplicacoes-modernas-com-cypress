@@ -398,3 +398,39 @@ it('Numbers', () => {
     expect(floatNumber).to.be.above(5)
 })
 ```
+
+## Assertivas do acesso a uma página
+### Como enviar ações para o cyprss
+Os arquivos de teste de cypress são embutidos com uma variável "cy" que tem uma api poderosa o suficiente para que todos testes sejam feitos a partir dela. 
+
+```bash
+describe('Cypress basics', () => {
+    it('Should visit a page and assert title', () => {
+        cy.visit('https://wcaquino.me/cypress/componentes.html')
+      
+        const title = cy.title() // não foi possível receber o valor devido a assincronicidade
+        console.log(title) // é possível imprimir  
+        // DESAFIOS // TODO - imprimir o log no console // TODO - escrever o título num campo de texto
+    })
+})
+```
+Ao trabalhar com promise, não tem como receber o valor diretamente, é preciso lidar com ele de uma forma assíncrona. O cypress trabalha muito de forma assíncrona. Nem com assync await resolve. 
+
+```bash
+cy.title()
+```
+Retorna um objeto Chainer, uma promise = Encadeador. após obtê-lo, encadeie a próxima ação desejada
+
+```bash
+.should
+```
+should é uma estrutura preparada para receber o objeto Chainer, promise. Cria uma assertiva que funciona até que chegue ou passe de um dado timeout. Quando retorna um erro, repetições são feitas como tentativas de atingir o resultado esperado até que atinja ou extrapole o timeout.
+
+### Outra forma de escrever
+
+```bash
+cy.title()
+    .should('be.equal', 'Campo de Treinamento')
+    .should('contain', 'Campo')
+```
+Ganha um pouco mais de tempo porque a busca por título é feita só uma vez e fica mais legível. 
