@@ -28,4 +28,62 @@ Editar o arquivo "package.json" e colocar o atributo "cypress:open": "cypress op
 
 npm run cypress:open
 
+## Nivelamento de javascript
 
+#### Preparação
+No projeto, ir até a pasta "integration" e criar um novo arquivo de teste seguindo o padrão "nome.spec.js"
+
+### Aula "Arrow Functions" 
+
+A arrow funtion consiste em uma forma diferente de escrever uma função (sem deixar a palavra "function" explicita). A sintaxe é a demonstrada no exemplo seguinte:
+
+```bash
+const soma = (a, b) => {
+  return a + b
+}
+```
+Os parâmetros são atribuídos a uma variável constante. Após a específicação dos parâmetros, os símbolos "=" e ">", que juntos "=>" se assemelham a uma "seta" (arrow), simbolizam a função e dipensam o uso da palavra "function". Após, são abertas {}, que contém internamente uma lógica. 
+
+#### Variações de escrita
+
+```bash
+const soma = (a, b) => a + b
+```
+
+Nessa sintaxe, o retorno da função vem logo após a "arrow", sem a necessidade de escrita da palavra "return", que é necessária quando a lógica do retorno está dentro de chaves "{}".
+
+```bash
+const soma = a => a + a
+```
+
+Quando existe somente um parâmetro, o parênteses "()" é dispensável. 
+
+```bash
+const soma = () => 5 + 5
+```
+
+Se não existem parâmetros, a escrita dos parênteses "()" é indispensável. 
+
+Uma diferença de execução importante entre a "function" e a "arrow function", é que a primeira, ao usar o this, referencia a quem a chamou, e a segunda, não varia, fica num escopo mais alto. 
+
+```bash
+it('a function test...', function() {
+    console.log('Function', this)
+}) 
+```
+
+Retorno no console
+```console
+Function Context {_runnable: Test, test: Test}test: undefined_runnable: undefined[[Prototype]]: Context[[Prototype]]: ObjectenableTimeouts: ƒ (enabled)inspect: ƒ ()retries: ƒ (n)runnable: ƒ (runnable)skip: ƒ ()slow: ƒ (ms)timeout: ƒ (ms)constructor: ƒ Context()[[Prototype]]: Object
+```
+
+```bash
+it('an arrow test...', () => {
+    console.log('Arrow', this)
+})
+
+```
+Retorno no console
+```console
+Arrow undefined
+```
