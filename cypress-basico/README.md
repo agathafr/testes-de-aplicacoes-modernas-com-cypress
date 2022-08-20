@@ -448,14 +448,14 @@ Ganha um pouco mais de tempo porque a busca por título é feita só uma vez e f
 ## .pause() e .debug()
 Elementos que ajudam a detalhar um campo ou ter uma melhor visibilidade de um erro. 
 
-### .pause()
+### .debug()
 ```bash
 cy.title().debug().should('contain', 'Campo')
 ```
 
 ![image](https://user-images.githubusercontent.com/85461130/185767789-2648b82f-ec0c-45ad-9b38-ed7593c8ff3b.png)
 
-### .pause
+### .pause()
 ```bash
 it.only('Should visit a page and assert title', () => {
     cy.visit('https://wcaquino.me/cypress/componentes.html')
