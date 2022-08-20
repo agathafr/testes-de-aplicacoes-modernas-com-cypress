@@ -434,3 +434,13 @@ cy.title()
     .should('contain', 'Campo')
 ```
 Ganha um pouco mais de tempo porque a busca por título é feita só uma vez e fica mais legível. 
+
+## Localizar e interagir com elemento
+```bash
+ it.only('Should find and interact with an element', () => {
+        cy.visit('https://wcaquino.me/cypress/componentes.html')
+        cy.get('#buttonSimple')
+            .click()
+            .should('have.value', 'Obrigado!')
+    })
+```
