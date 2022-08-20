@@ -444,3 +444,30 @@ Ganha um pouco mais de tempo porque a busca por título é feita só uma vez e f
             .should('have.value', 'Obrigado!')
     })
 ```
+
+## .pause() e .debug()
+Elementos que ajudam a detalhar um campo ou ter uma melhor visibilidade de um erro. 
+
+### .pause()
+```bash
+cy.title().debug().should('contain', 'Campo')
+```
+
+![image](https://user-images.githubusercontent.com/85461130/185767789-2648b82f-ec0c-45ad-9b38-ed7593c8ff3b.png)
+
+### .pause
+```bash
+it.only('Should visit a page and assert title', () => {
+    cy.visit('https://wcaquino.me/cypress/componentes.html')
+    
+    cy.pause()
+
+    cy.title()
+        .should('be.equal', 'Campo de Treinamento')
+        .should('contain', 'Campo')
+})
+```
+
+![image](https://user-images.githubusercontent.com/85461130/185767874-73b9ae2f-4289-4ff0-b5ec-484996f13420.png)
+
+Com o .pause() é possível percorrer passo a passo das linhas programadas com o gerenciamento do cypress. O .debuger() também possibilita scanear as linhas mas o gerenciamento é mais do navegador. Ele funciona melhor para detalhar os passos no console. 
