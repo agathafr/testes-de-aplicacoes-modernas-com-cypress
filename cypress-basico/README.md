@@ -87,3 +87,67 @@ Retorno no console
 ```console
 Arrow undefined
 ```
+
+## Promises 
+
+Tratam solicitações demoradas como assíncronas para não interromper o funcionamento da aplicação enquanto espera um retorno. Com o conceito de assincronicidade, a aplicação continua rodando e quando houver uma resposta, ela é tratada conforme programado. Callback já foi utilizado com esse mesmo propósito, mas devido a camplicações em cenários onde há necessidade em utilizar muitos processos assíncronos aninhados, hoje em dia promises são recomendadas para simplificar esse cenário. 
+
+#### Callback
+
+```bash
+const getSomething = callback => {
+    setTimeout(() => {
+        callback(12);
+    }, 1000)
+}
+```
+```bash
+const system = () => {
+    console.log('init');
+    getSomething(some => console.log(`Something is ${some}`));
+    console.log('end')
+}
+```
+
+#### Promise
+```bash
+const getSomething = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(13);
+        }, 1000)
+    }) 
+}
+```
+
+```bash
+const system = () => {
+    console.log('init');
+    getSomething().then(some => {
+        console.log(`Something is ${some}`)
+    })
+}
+```
+
+#### Async Await
+
+Implementa promisses e deixar o uso mais simplificado. Como faz gerenciamento, tem um ciclo de vida, conceitos de retrys, não é recomendado o uso com cypress. Este precisa das promisses como descrito na documentação. 
+
+```bash
+const getSomething = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(13);
+        }, 1000)
+    }) 
+}
+```
+
+```bash
+const system = async () => {
+    console.log('init');
+    const some = await getSomething()
+    console.log(`Something is ${some}`)
+    console.log('end')
+}
+``` 
