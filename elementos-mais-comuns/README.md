@@ -323,13 +323,28 @@ Funcionamento semelhante ao radio com o diferencial de permitir marcação múlt
 
 ```bash
 it.only('Checkbox', () => {
-        cy.get('#formComidaPizza')
-            .click()
-            .should('be.checked')
+    cy.get('#formComidaPizza')
+        .click()
+        .should('be.checked')
 
-        cy.get('[name="formComidaFavorita"]').click({multiple: true})
-        cy.get('#formComidaPizza').should('not.be.checked')
-        cy.get('#formComidaVegetariana').should('be.checked')
-    })
+    cy.get('[name="formComidaFavorita"]').click({multiple: true})
+    cy.get('#formComidaPizza').should('not.be.checked')
+    cy.get('#formComidaVegetariana').should('be.checked')
+})
 ```
 ![image](https://user-images.githubusercontent.com/85461130/185788009-a52c49d1-4154-4e0a-9114-dc62f1765922.png)
+
+## Combo 
+Para selecionar uma opção é aceito o texto exibido na lista mas para verificação, apenas o valor do atributo value. 
+
+```bash
+it.only('Combo', () => {
+    cy.get('[data-test=dataEscolaridade]')
+        .select('2o grau completo')
+        .should('have.value', '2graucomp')
+
+    cy.get('[data-test=dataEscolaridade]')
+        .select('1graucomp')
+        .should('have.value', '1graucomp')
+})
+```
