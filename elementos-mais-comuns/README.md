@@ -316,4 +316,20 @@ it('RadioButton', () => {
 ```bash
 [name=formSexo]
 ```
-É feita entre colchetes
+É feita entre colchetes.
+
+## Checkbox
+Funcionamento semelhante ao radio com o diferencial de permitir marcação múltipla (desde que objeto que possibilita isso seja enviado como parâmetro).
+
+```bash
+it.only('Checkbox', () => {
+        cy.get('#formComidaPizza')
+            .click()
+            .should('be.checked')
+
+        cy.get('[name="formComidaFavorita"]').click({multiple: true})
+        cy.get('#formComidaPizza').should('not.be.checked')
+        cy.get('#formComidaVegetariana').should('be.checked')
+    })
+```
+![image](https://user-images.githubusercontent.com/85461130/185788009-a52c49d1-4154-4e0a-9114-dc62f1765922.png)
