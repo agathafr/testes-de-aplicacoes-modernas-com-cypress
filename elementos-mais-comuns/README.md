@@ -348,3 +348,15 @@ it.only('Combo', () => {
         .should('have.value', '1graucomp')
 })
 ```
+## Combo múltiplo
+Possibilita selecionar mais de uma opção. Só consegue localizar o elemento pelo valor do value. 
+```bash
+it.only('Combo múltiplo', () => {
+    cy.get('[data-testid=dataEsportes]')
+        .select(['natacao', 'Corrida', 'nada'])
+    //TODO validar opções selecionadas do combo múltiplo
+})
+```
+![image](https://user-images.githubusercontent.com/85461130/185788678-f4b56240-3707-4dbc-99a9-d8d608236b97.png)
+
+ 
