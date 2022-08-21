@@ -234,9 +234,8 @@ O before() é específico e o beforeEach() é herdado do grupo mais externo
 São aqueles que permitem a inserção de valores.
 ```bash
 it.only('TextFields', () => {
-        cy.get('#formNome').type('Cypress Test')
-        cy.get('#formNome').should('have.value', 'Cypress Test')
-
+    cy.get('#formNome').type('Cypress Test')
+    cy.get('#formNome').should('have.value', 'Cypress Test')
     })
 ```
 
@@ -274,25 +273,47 @@ Seleciona todo o valor digitado em um campo e atrasa a execução da ação.
 
 ```bash
 it.only('TextFields', () => {
-        cy.get('#formNome').type('Cypress Test')
-        cy.get('#formNome').should('have.value', 'Cypress Test')
+    cy.get('#formNome').type('Cypress Test')
+    cy.get('#formNome').should('have.value', 'Cypress Test')
 
-        cy.get('#elementosForm\\:sugestoes')
-            .type('textarea')
-            .should('have.value', 'textarea')
+    cy.get('#elementosForm\\:sugestoes')
+        .type('textarea')
+        .should('have.value', 'textarea')
 
-        cy.get('#tabelaUsuarios > :nth-child(2) > :nth-child(1) > :nth-child(6)')
-            .type('???')
+    cy.get('#tabelaUsuarios > :nth-child(2) > :nth-child(1) > :nth-child(6)')
+        .type('???')
 
-        cy.get('[data-cy=dataSobrenome]')
-            .type('Teste12345{backspace}{backspace}')
-            .should('have.value', 'Teste123')
+    cy.get('[data-cy=dataSobrenome]')
+        .type('Teste12345{backspace}{backspace}')
+        .should('have.value', 'Teste123')
 
-        cy.get('#elementosForm\\:sugestoes')
-            .clear()
-            .type('Erro{selectall}acerto', { delay: 100 })
-            .should('have.value', 'acerto')
+    cy.get('#elementosForm\\:sugestoes')
+        .clear()
+        .type('Erro{selectall}acerto', { delay: 100 })
+        .should('have.value', 'acerto')
     })
 ```
 
 Evita a repetição do localizador.
+
+## Radio
+O elemento radio button fica agrupado para permitir somente uma marcação. Indica ao usuário que deve fazer uma escolha entre opções. Não é possível selecionar mais de uma. 
+
+```bash
+it('RadioButton', () => {
+    cy.get('#formSexoFem') // localização
+        .click() // interação
+        .should('be.checked') // verificação
+
+    cy.get('#formSexoMasc').should('not.be.checked')
+
+    cy.get('[name=formSexo]').should('have.length', 2) 
+    })
+```
+
+### Busca por propriedade
+
+```bash
+[name=formSexo]
+```
+É feita entre colchetes
