@@ -229,4 +229,70 @@ describe('Work with basic elements', () => {
 
 O before() é específico e o beforeEach() é herdado do grupo mais externo
 
+## Campos de texto
 
+São aqueles que permitem a inserção de valores.
+```bash
+it.only('TextFields', () => {
+        cy.get('#formNome').type('Cypress Test')
+        cy.get('#formNome').should('have.value', 'Cypress Test')
+
+    })
+```
+
+### .type()
+```bash
+cy.get('#formNome').type('Cypress Test')
+```
+Preenche um campo de texto com algum valor.
+
+### 'have.value'
+```bash
+should('have.value', 'Cypress Test')
+```
+Verifica se o conteúdo de um campo de texto contém o valor especificado no segundo parâmetro. Um texto em um input text, text field, não fica acessível com o 'have.text' porque fica no atributo "value" do campo input. 
+
+### Localizador de id
+```bash
+cy.get('#elementosForm\\:sugestoes')
+```
+Caso possua ":" e apenas uma \, é preciso incluir mais uma \, conforme código acima.
+
+### {backspace}
+```bash
+.type('Teste12345{backspace}{backspace}')
+```
+Apaga um caractere digitado.
+
+### {selectall} e { delay: 100 }
+```bash
+.type('Erro{selectall}acerto', { delay: 100 })
+```
+Seleciona todo o valor digitado em um campo e atrasa a execução da ação. 
+
+### Encadeamento
+
+```bash
+it.only('TextFields', () => {
+        cy.get('#formNome').type('Cypress Test')
+        cy.get('#formNome').should('have.value', 'Cypress Test')
+
+        cy.get('#elementosForm\\:sugestoes')
+            .type('textarea')
+            .should('have.value', 'textarea')
+
+        cy.get('#tabelaUsuarios > :nth-child(2) > :nth-child(1) > :nth-child(6)')
+            .type('???')
+
+        cy.get('[data-cy=dataSobrenome]')
+            .type('Teste12345{backspace}{backspace}')
+            .should('have.value', 'Teste123')
+
+        cy.get('#elementosForm\\:sugestoes')
+            .clear()
+            .type('Erro{selectall}acerto', { delay: 100 })
+            .should('have.value', 'acerto')
+    })
+```
+
+Evita a repetição do localizador.
